@@ -39,12 +39,12 @@ public abstract class Character {
     }
 
     public void equip(Equipment _item) {
-        if (_item instanceof Weapon) {
-            if (!Arrays.asList(_class.allowedWeapons).contains(((Weapon) _item).weaponType)) {
+        if (_item instanceof Weapon weapon) {
+            if (!Arrays.asList(_class.allowedWeapons).contains(weapon.weaponType)) {
                 // throw exception
             }
-        } else if (_item instanceof Armor) {
-            if (!Arrays.asList(_class.allowedArmor).contains(((Armor)_item).armorType)) {
+        } else if (_item instanceof Armor armor) {
+            if (!Arrays.asList(_class.allowedArmor).contains(armor.armorType)) {
                 // throw exception
             }
         }
