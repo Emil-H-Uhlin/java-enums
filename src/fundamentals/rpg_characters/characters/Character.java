@@ -75,16 +75,50 @@ public class Character {
     }
 
     public void equip(Equipment _item) {
+        if (_item.getRequiredLevel() > level) {
+            // throw exception
+            return;
+        }
+
         if (_item instanceof Weapon weapon) {
             if (!Arrays.asList(_class.allowedWeapons).contains(weapon.weaponType)) {
+                return;
                 // throw exception
             }
         } else if (_item instanceof Armor armor) {
             if (!Arrays.asList(_class.allowedArmor).contains(armor.armorType)) {
+                return;
                 // throw exception
             }
         }
 
         equipment.put(_item.itemSlot, _item);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("""
+                %s
+                name: %s
+                level: %s
+                
+                Base attriutes:
+                Strength: %s
+                Dexterity: %s
+                Intelligence: %s
+                
+                Total attributes:
+                Strength: %s
+                Dexterity: %s
+                Intelligence: %s
+                """, _class.name(),
+                name,
+                getLevel(),
+                getBaseStrength(),
+                getBaseDexterity(),
+                getBaseIntelligence(),
+                getTotalStrength(),
+                getTotalDexterity(),
+                getTotalIntelligence());
     }
 }
