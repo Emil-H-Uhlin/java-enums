@@ -5,7 +5,11 @@ public abstract class Character {
     private int level = 1;
 
     private int strength, dexterity, intelligence;
-    private int strPerLevel, dexPerLevel, intPerLevel;
+    private final int strPerLevel, dexPerLevel, intPerLevel;
+
+    public int getStrength() { return strength; }
+    public int getDexterity() { return dexterity; }
+    public int getIntelligence() { return intelligence; }
 
     public int getLevel() { return level; }
 
@@ -21,5 +25,13 @@ public abstract class Character {
         strPerLevel = _strPerLevel;
         dexPerLevel = _dexPerLevel;
         intPerLevel = _intPerLevel;
+    }
+
+    public void levelUp() {
+        level++;
+
+        strength += strPerLevel;
+        dexterity += dexPerLevel;
+        intelligence += intPerLevel;
     }
 }
