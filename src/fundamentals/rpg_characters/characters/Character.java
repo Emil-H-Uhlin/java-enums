@@ -5,7 +5,7 @@ import fundamentals.rpg_characters.equipment.*;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public abstract class Character {
+public class Character {
     public final String name;
     public final HeroClass _class;
 
