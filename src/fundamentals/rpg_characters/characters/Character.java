@@ -13,11 +13,47 @@ public abstract class Character {
 
     private int strength, dexterity, intelligence;
 
-    public int getStrength() { return strength; }
-    public int getDexterity() { return dexterity; }
-    public int getIntelligence() { return intelligence; }
+    public int getBaseStrength() { return strength; }
+    public int getBaseDexterity() { return dexterity; }
+    public int getBaseIntelligence() { return intelligence; }
 
     public int getLevel() { return level; }
+
+    public int getTotalStrength() {
+        int additional = 0;
+
+        for (var slot: equipment.keySet()) {
+            if (equipment.get(slot) instanceof Armor armor) {
+                additional += armor.getBonusStrength();
+            }
+        }
+
+        return getBaseStrength() + additional;
+    }
+
+    public int getTotalDexterity() {
+        int additional = 0;
+
+        for (var slot: equipment.keySet()) {
+            if (equipment.get(slot) instanceof Armor armor) {
+                additional += armor.getBonusDexterity();
+            }
+        }
+
+        return getBaseDexterity() + additional;
+    }
+
+    public int getTotalIntelligence() {
+        int additional = 0;
+
+        for (var slot: equipment.keySet()) {
+            if (equipment.get(slot) instanceof Armor armor) {
+                additional += armor.getBonusIntelligence();
+            }
+        }
+
+        return getBaseIntelligence() + additional;
+    }
 
     private final HashMap<EquipmentSlot, Equipment> equipment = new HashMap<>();
 
