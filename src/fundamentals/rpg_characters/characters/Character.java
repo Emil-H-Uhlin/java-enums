@@ -1,5 +1,8 @@
 package fundamentals.rpg_characters.characters;
 
+import fundamentals.rpg_characters.equipment.*;
+import java.util.HashMap;
+
 public abstract class Character {
     public final String name;
     public final HeroClass _class;
@@ -13,6 +16,8 @@ public abstract class Character {
     public int getIntelligence() { return intelligence; }
 
     public int getLevel() { return level; }
+
+    private final HashMap<EquipmentSlot, Equipment> equipment = new HashMap<>();
 
     public Character(String _name, HeroClass _heroClass) {
         name = _name;
@@ -29,5 +34,9 @@ public abstract class Character {
         strength += _class.strPerLevel;
         dexterity += _class.dexPerLevel;
         intelligence += _class.intPerLevel;
+    }
+
+    public void equip(Equipment _item) {
+
     }
 }
