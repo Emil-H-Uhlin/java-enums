@@ -35,7 +35,7 @@ public enum HeroClass {
             1, 1, 5,
             Attributes.Intelligence,
             new WeaponType[] {
-                    WeaponType.staff, WeaponType.Wand
+                    WeaponType.Staff, WeaponType.Wand
             },
             new ArmorType[] {
                     ArmorType.Cloth
