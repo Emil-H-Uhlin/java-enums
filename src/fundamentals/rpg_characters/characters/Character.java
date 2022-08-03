@@ -1,6 +1,8 @@
 package fundamentals.rpg_characters.characters;
 
 import fundamentals.rpg_characters.equipment.*;
+
+import java.util.Arrays;
 import java.util.HashMap;
 
 public abstract class Character {
@@ -37,6 +39,16 @@ public abstract class Character {
     }
 
     public void equip(Equipment _item) {
+        if (_item instanceof Weapon) {
+            if (!Arrays.asList(_class.allowedWeapons).contains(((Weapon) _item).weaponType)) {
+                // throw exception
+            }
+        } else if (_item instanceof Armor) {
+            if (!Arrays.asList(_class.allowedArmor).contains(((Armor)_item).armorType)) {
+                // throw exception
+            }
+        }
 
+        equipment.put(_item.itemSlot, _item);
     }
 }
