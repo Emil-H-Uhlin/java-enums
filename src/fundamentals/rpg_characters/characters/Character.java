@@ -1,11 +1,12 @@
 package fundamentals.rpg_characters.characters;
 
 public abstract class Character {
-    private final String name;
+    public final String name;
+    public final HeroClass _class;
+
     private int level = 1;
 
     private int strength, dexterity, intelligence;
-    private final int strPerLevel, dexPerLevel, intPerLevel;
 
     public int getStrength() { return strength; }
     public int getDexterity() { return dexterity; }
@@ -13,25 +14,20 @@ public abstract class Character {
 
     public int getLevel() { return level; }
 
-    public Character(String _name,
-                     int _strength, int _dexterity, int _intelligence,
-                     int _strPerLevel, int _dexPerLevel, int _intPerLevel) {
+    public Character(String _name, HeroClass _heroClass) {
         name = _name;
+        _class = _heroClass;
 
-        strength = _strength;
-        dexterity = _dexterity;
-        intelligence = _intelligence;
-
-        strPerLevel = _strPerLevel;
-        dexPerLevel = _dexPerLevel;
-        intPerLevel = _intPerLevel;
+        strength = _class.lvl1Str;
+        dexterity = _class.lvl1Dex;
+        intelligence = _class.lvl1Int;
     }
 
     public void levelUp() {
         level++;
 
-        strength += strPerLevel;
-        dexterity += dexPerLevel;
-        intelligence += intPerLevel;
+        strength += _class.strPerLevel;
+        dexterity += _class.dexPerLevel;
+        intelligence += _class.intPerLevel;
     }
 }
