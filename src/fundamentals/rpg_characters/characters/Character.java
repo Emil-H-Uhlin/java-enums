@@ -79,19 +79,19 @@ public class Character {
     public void equip(Equipment _item) {
         if (_item instanceof Weapon weapon) {
             if (weapon.getRequiredLevel() > level) {
-                throw new InvalidWeaponException("Character does not meet the level requirements of weapon!");
+                throw new InvalidWeaponException(String.format("Character '%s' does not meet the level requirements of weapon!", name));
             }
 
             if (!Arrays.asList(_class.allowedWeapons).contains(weapon.weaponType)) {
-                throw new InvalidWeaponException("Character is not allowed to use that weapon!");
+                throw new InvalidWeaponException(String.format("The class '%s' is not allowed to use '%ss'!", _class.name(), weapon.weaponType.name()));
             }
         } else if (_item instanceof Armor armor) {
             if (armor.getRequiredLevel() > level) {
-                throw new InvalidArmorException("Character does not meet the level requirements of armor!");
+                throw new InvalidArmorException(String.format("Character '%s' does not meet the level requirements of armor!", name));
             }
 
             if (!Arrays.asList(_class.allowedArmor).contains(armor.armorType)) {
-                throw new InvalidArmorException("Character is not allowed to use that kind of armor!");
+                throw new InvalidArmorException(String.format("Character '%s' is not allowed to use armor of type '%s'", name, armor.armorType.name()));
             }
         }
 
