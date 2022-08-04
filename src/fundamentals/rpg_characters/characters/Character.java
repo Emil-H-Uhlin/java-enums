@@ -102,4 +102,34 @@ public class Character {
         }
         else throw new InvalidWeaponException("Item equipped in 'Weapon' slot is not a weapon!");
     }
+
+    @Override
+    public String toString() {
+        var total = getTotalAttributes();
+
+        return String.format("""
+                Character name: %s
+                Level: %s
+                Base Attributes:
+                    - Strength: %s
+                    - Dexterity: %s
+                    - Intelligence: %s
+                
+                Total Attributes:
+                    - Strength: %s
+                    - Dexterity: %s
+                    - Intelligence: %s
+                
+                Equipment:
+                    
+                DPS: %s
+                """, name, level,
+                attributes.getStrength(),
+                attributes.getDexterity(),
+                attributes.getIntelligence(),
+                total.getStrength(),
+                total.getDexterity(),
+                total.getIntelligence(),
+                getDPS());
+    }
 }
