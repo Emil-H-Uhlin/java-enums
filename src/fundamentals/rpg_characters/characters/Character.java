@@ -3,6 +3,7 @@ package fundamentals.rpg_characters.characters;
 import fundamentals.rpg_characters.equipment.*;
 import fundamentals.rpg_characters.exceptions.InvalidArmorException;
 import fundamentals.rpg_characters.exceptions.InvalidWeaponException;
+import jdk.jshell.spi.ExecutionControl;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -25,7 +26,6 @@ public class Character {
         Attributes baseAttributes = attributes;
 
         for (var slot: equipment.keySet()) {
-            System.out.println(slot);
             if (equipment.get(slot) instanceof Armor armor) {
                 baseAttributes = baseAttributes.add(armor.getBonusAttributes());
             }
@@ -69,6 +69,38 @@ public class Character {
         }
 
         equipment.put(_item.itemSlot, _item);
+    }
+
+    private int getTotalPrimaryAttribute() {
+        var total = getTotalAttributes();
+
+        switch (_class.primaryAttribute) {
+            case Strength -> {
+                return total.getStrength();
+            }
+            case Dexterity -> {
+                return total.getDexterity();
+            }
+            case Intelligence -> {
+                return total.getIntelligence();
+            }
+            default -> throw new RuntimeException("Character: getTotalPrimaryAttribute: Unknown attribute - not implemented?");
+        }
+    }
+
+    public float getDPS() {
+        var item = equipment.get(EquipmentSlot.Weapon);
+
+        var primaryAttribute = getTotalPrimaryAttribute();
+
+        if (item == null) {
+            return 1f + (primaryAttribute / 100f);
+        }
+
+        if (item instanceof Weapon weapon) {
+            return weapon.getDPS() * (1 + (primaryAttribute / 100f));
+        }
+        else throw new InvalidWeaponException("Item equipped in 'Weapon' slot is not a weapon!");
     }
 
     @Override
