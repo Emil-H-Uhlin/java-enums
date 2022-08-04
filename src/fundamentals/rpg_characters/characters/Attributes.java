@@ -18,10 +18,10 @@ public class Attributes {
     }
 
     public Attributes add(Attributes _other) {
-        strength += _other.strength;
-        dexterity += _other.dexterity;
-        intelligence += _other.intelligence;
-
-        return this;
+        return new Attributes(
+                strength + _other.strength,
+                dexterity + _other.dexterity,
+                intelligence + _other.intelligence
+        );
     }
 }

@@ -15,46 +15,23 @@ public class Character {
 
     private Attributes attributes;
 
-    public int getBaseStrength() { return attributes.getStrength(); }
-    public int getBaseDexterity() { return attributes.getDexterity(); }
-    public int getBaseIntelligence() { return attributes.getIntelligence(); }
-
     public int getLevel() { return level; }
 
-    public int getTotalStrength() {
-        int additional = 0;
-
-        for (var slot: equipment.keySet()) {
-            if (equipment.get(slot) instanceof Armor armor) {
-                additional += armor.getBonusStrength();
-            }
-        }
-
-        return getBaseStrength() + additional;
+    public Attributes getBaseAttributes() {
+        return attributes;
     }
 
-    public int getTotalDexterity() {
-        int additional = 0;
+    public Attributes getTotalAttributes() {
+        Attributes baseAttributes = attributes;
 
         for (var slot: equipment.keySet()) {
+            System.out.println(slot);
             if (equipment.get(slot) instanceof Armor armor) {
-                additional += armor.getBonusDexterity();
+                baseAttributes = baseAttributes.add(armor.getBonusAttributes());
             }
         }
 
-        return getBaseDexterity() + additional;
-    }
-
-    public int getTotalIntelligence() {
-        int additional = 0;
-
-        for (var slot: equipment.keySet()) {
-            if (equipment.get(slot) instanceof Armor armor) {
-                additional += armor.getBonusIntelligence();
-            }
-        }
-
-        return getBaseIntelligence() + additional;
+        return baseAttributes;
     }
 
     private final HashMap<EquipmentSlot, Equipment> equipment = new HashMap<>();
@@ -96,6 +73,8 @@ public class Character {
 
     @Override
     public String toString() {
+        var totalAttr = getTotalAttributes();
+
         return String.format("""
                 %s
                 name: %s
@@ -113,11 +92,11 @@ public class Character {
                 """, _class.name(),
                 name,
                 getLevel(),
-                getBaseStrength(),
-                getBaseDexterity(),
-                getBaseIntelligence(),
-                getTotalStrength(),
-                getTotalDexterity(),
-                getTotalIntelligence());
+                attributes.getStrength(),
+                attributes.getDexterity(),
+                attributes.getIntelligence(),
+                totalAttr.getStrength(),
+                totalAttr.getDexterity(),
+                totalAttr.getIntelligence());
     }
 }
