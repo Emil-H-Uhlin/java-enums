@@ -110,6 +110,8 @@ public class Character {
         return String.format("""
                 Character name: %s
                 Level: %s
+                DPS: %s
+                
                 Base Attributes:
                     - Strength: %s
                     - Dexterity: %s
@@ -119,17 +121,13 @@ public class Character {
                     - Strength: %s
                     - Dexterity: %s
                     - Intelligence: %s
-                
-                Equipment:
-                    
-                DPS: %s
                 """, name, level,
+                getDPS(),
                 attributes.getStrength(),
                 attributes.getDexterity(),
                 attributes.getIntelligence(),
                 total.getStrength(),
                 total.getDexterity(),
-                total.getIntelligence(),
-                getDPS());
+                total.getIntelligence());
     }
 }
