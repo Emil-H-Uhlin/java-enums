@@ -1,6 +1,8 @@
 package fundamentals.rpg_characters.characters;
 
 import fundamentals.rpg_characters.equipment.*;
+import fundamentals.rpg_characters.exceptions.InvalidArmorException;
+import fundamentals.rpg_characters.exceptions.InvalidWeaponException;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -75,20 +77,21 @@ public class Character {
     }
 
     public void equip(Equipment _item) {
-        if (_item.getRequiredLevel() > level) {
-            // throw exception
-            return;
-        }
-
         if (_item instanceof Weapon weapon) {
+            if (weapon.getRequiredLevel() > level) {
+                throw new InvalidWeaponException("Character does not meet the level requirements of weapon!");
+            }
+
             if (!Arrays.asList(_class.allowedWeapons).contains(weapon.weaponType)) {
-                return;
-                // throw exception
+                throw new InvalidWeaponException("Character is not allowed to use that weapon!");
             }
         } else if (_item instanceof Armor armor) {
+            if (armor.getRequiredLevel() > level) {
+                throw new InvalidArmorException("Character does not meet the level requirements of armor!");
+            }
+
             if (!Arrays.asList(_class.allowedArmor).contains(armor.armorType)) {
-                return;
-                // throw exception
+                throw new InvalidArmorException("Character is not allowed to use that kind of armor!");
             }
         }
 
