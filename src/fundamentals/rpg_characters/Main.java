@@ -11,6 +11,11 @@ public class Main {
         var item = new Armor("Iron Curiass", EquipmentSlot.Torso, 1, ArmorType.Plate, 2, 1, 1);
 
         character.equip(item);
+
+        for (int i = 0; i < 2; i++) {
+            character.levelUp();
+        }
+        
         System.out.println(character);
     }
 }
