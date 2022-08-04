@@ -13,11 +13,11 @@ public class Character {
 
     private int level = 1;
 
-    private int strength, dexterity, intelligence;
+    private Attributes attributes;
 
-    public int getBaseStrength() { return strength; }
-    public int getBaseDexterity() { return dexterity; }
-    public int getBaseIntelligence() { return intelligence; }
+    public int getBaseStrength() { return attributes.getStrength(); }
+    public int getBaseDexterity() { return attributes.getDexterity(); }
+    public int getBaseIntelligence() { return attributes.getIntelligence(); }
 
     public int getLevel() { return level; }
 
@@ -63,17 +63,13 @@ public class Character {
         name = _name;
         _class = _heroClass;
 
-        strength = _class.lvl1Str;
-        dexterity = _class.lvl1Dex;
-        intelligence = _class.lvl1Int;
+        attributes = _class.level1Attributes;
     }
 
     public void levelUp() {
         level++;
 
-        strength += _class.strPerLevel;
-        dexterity += _class.dexPerLevel;
-        intelligence += _class.intPerLevel;
+        attributes = attributes.add(_class.gainedAttributesPerLevel);
     }
 
     public void equip(Equipment _item) {
