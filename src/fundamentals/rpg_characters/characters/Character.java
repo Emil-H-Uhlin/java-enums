@@ -5,7 +5,7 @@ import fundamentals.rpg_characters.equipment.*;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public abstract class Character {
+public class Character {
     public final String name;
     public final HeroClass _class;
 
@@ -13,11 +13,47 @@ public abstract class Character {
 
     private int strength, dexterity, intelligence;
 
-    public int getStrength() { return strength; }
-    public int getDexterity() { return dexterity; }
-    public int getIntelligence() { return intelligence; }
+    public int getBaseStrength() { return strength; }
+    public int getBaseDexterity() { return dexterity; }
+    public int getBaseIntelligence() { return intelligence; }
 
     public int getLevel() { return level; }
+
+    public int getTotalStrength() {
+        int additional = 0;
+
+        for (var slot: equipment.keySet()) {
+            if (equipment.get(slot) instanceof Armor armor) {
+                additional += armor.getBonusStrength();
+            }
+        }
+
+        return getBaseStrength() + additional;
+    }
+
+    public int getTotalDexterity() {
+        int additional = 0;
+
+        for (var slot: equipment.keySet()) {
+            if (equipment.get(slot) instanceof Armor armor) {
+                additional += armor.getBonusDexterity();
+            }
+        }
+
+        return getBaseDexterity() + additional;
+    }
+
+    public int getTotalIntelligence() {
+        int additional = 0;
+
+        for (var slot: equipment.keySet()) {
+            if (equipment.get(slot) instanceof Armor armor) {
+                additional += armor.getBonusIntelligence();
+            }
+        }
+
+        return getBaseIntelligence() + additional;
+    }
 
     private final HashMap<EquipmentSlot, Equipment> equipment = new HashMap<>();
 
@@ -39,16 +75,50 @@ public abstract class Character {
     }
 
     public void equip(Equipment _item) {
-        if (_item instanceof Weapon) {
-            if (!Arrays.asList(_class.allowedWeapons).contains(((Weapon) _item).weaponType)) {
+        if (_item.getRequiredLevel() > level) {
+            // throw exception
+            return;
+        }
+
+        if (_item instanceof Weapon weapon) {
+            if (!Arrays.asList(_class.allowedWeapons).contains(weapon.weaponType)) {
+                return;
                 // throw exception
             }
-        } else if (_item instanceof Armor) {
-            if (!Arrays.asList(_class.allowedArmor).contains(((Armor)_item).armorType)) {
+        } else if (_item instanceof Armor armor) {
+            if (!Arrays.asList(_class.allowedArmor).contains(armor.armorType)) {
+                return;
                 // throw exception
             }
         }
 
         equipment.put(_item.itemSlot, _item);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("""
+                %s
+                name: %s
+                level: %s
+                
+                Base attriutes:
+                Strength: %s
+                Dexterity: %s
+                Intelligence: %s
+                
+                Total attributes:
+                Strength: %s
+                Dexterity: %s
+                Intelligence: %s
+                """, _class.name(),
+                name,
+                getLevel(),
+                getBaseStrength(),
+                getBaseDexterity(),
+                getBaseIntelligence(),
+                getTotalStrength(),
+                getTotalDexterity(),
+                getTotalIntelligence());
     }
 }
