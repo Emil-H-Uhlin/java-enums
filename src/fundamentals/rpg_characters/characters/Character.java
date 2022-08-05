@@ -3,7 +3,6 @@ package fundamentals.rpg_characters.characters;
 import fundamentals.rpg_characters.equipment.*;
 import fundamentals.rpg_characters.exceptions.InvalidArmorException;
 import fundamentals.rpg_characters.exceptions.InvalidWeaponException;
-import jdk.jshell.spi.ExecutionControl;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -34,7 +33,7 @@ public class Character {
         return baseAttributes;
     }
 
-    private final HashMap<EquipmentSlot, Equipment> equipment = new HashMap<>();
+    private final HashMap<EquipmentSlot, IEquipable> equipment = new HashMap<>();
 
     public Character(String _name, HeroClass _heroClass) {
         name = _name;
@@ -49,7 +48,7 @@ public class Character {
         attributes = attributes.add(_class.gainedAttributesPerLevel);
     }
 
-    public void equip(Equipment _item) {
+    public void equip(IEquipable _item) {
         if (_item instanceof Weapon weapon) {
             if (weapon.getRequiredLevel() > level) {
                 throw new InvalidWeaponException(String.format("Character '%s' does not meet the level requirements of weapon!", name));
@@ -68,7 +67,7 @@ public class Character {
             }
         }
 
-        equipment.put(_item.itemSlot, _item);
+        equipment.put(_item.getItemSlot(), _item);
     }
 
     private int getTotalPrimaryAttribute() {
