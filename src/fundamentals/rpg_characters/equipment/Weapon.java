@@ -3,38 +3,47 @@ package fundamentals.rpg_characters.equipment;
 public class Weapon implements IEquippable {
     public final WeaponType weaponType;
 
-    private int damage;
-    private float attacksPerSecond;
+    private final String name;
 
-    public int getDamage() { return damage; }
-    public void setDamage(int _value) { damage = _value; }
+    private final int requiredLevel;
 
-    public float getAttacksPerSecond() { return attacksPerSecond; }
-    public void setAttacksPerSecond(float _value) { attacksPerSecond = _value; }
-
-    public float getDPS() {
-        return damage * attacksPerSecond;
-    }
+    private final int damage;
+    private final float attacksPerSecond;
 
     public Weapon(String _name, WeaponType _weaponType, int _requiredLevel, int _damage, float _attacksPerSecond) {
+        name = _name;
+        requiredLevel = _requiredLevel;
+
         damage = _damage;
         attacksPerSecond = _attacksPerSecond;
 
         weaponType = _weaponType;
     }
 
+    public int getDamage() {
+        return damage;
+    }
+
+    public float getAttacksPerSecond() {
+        return attacksPerSecond;
+    }
+
+    public float getDPS() {
+        return damage * attacksPerSecond;
+    }
+
     @Override
     public String getItemName() {
-        return null;
+        return name;
     }
 
     @Override
     public EquipmentSlot getItemSlot() {
-        return null;
+        return EquipmentSlot.Weapon;
     }
 
     @Override
     public int getRequiredLevel() {
-        return 0;
+        return requiredLevel;
     }
 }

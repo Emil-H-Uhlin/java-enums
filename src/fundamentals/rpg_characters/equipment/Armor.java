@@ -8,7 +8,12 @@ import java.util.Arrays;
 public class Armor implements IEquippable {
     public final ArmorType armorType;
 
-    private Attributes bonusAttributes;
+    private final String name;
+    private final EquipmentSlot equipmentSlot;
+
+    private final int levelRequired;
+
+    private final Attributes bonusAttributes;
 
     public Attributes getBonusAttributes() { return bonusAttributes; }
 
@@ -17,6 +22,11 @@ public class Armor implements IEquippable {
         if (_slot == EquipmentSlot.Weapon) {
             throw new InvalidArmorException("An armor may not be assigned to slot 'Weapon'!");
         }
+
+        name = _name;
+        equipmentSlot = _slot;
+
+        levelRequired = _requiredLevel;
 
         armorType = _armorType;
 
@@ -29,16 +39,16 @@ public class Armor implements IEquippable {
 
     @Override
     public String getItemName() {
-        return null;
+        return name;
     }
 
     @Override
     public EquipmentSlot getItemSlot() {
-        return null;
+        return equipmentSlot;
     }
 
     @Override
     public int getRequiredLevel() {
-        return 0;
+        return levelRequired;
     }
 }
