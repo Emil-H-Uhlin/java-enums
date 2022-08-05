@@ -1,6 +1,6 @@
 package fundamentals.rpg_characters.equipment;
 
-public class Weapon implements IEquippable {
+public class Weapon implements IEquipable {
     public final WeaponType weaponType;
 
     private final String name;

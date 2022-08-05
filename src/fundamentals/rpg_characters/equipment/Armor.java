@@ -3,9 +3,7 @@ package fundamentals.rpg_characters.equipment;
 import fundamentals.rpg_characters.characters.Attributes;
 import fundamentals.rpg_characters.exceptions.InvalidArmorException;
 
-import java.util.Arrays;
-
-public class Armor implements IEquippable {
+public class Armor implements IEquipable {
     public final ArmorType armorType;
 
     private final String name;
