@@ -61,49 +61,49 @@ class WarriorTest {
     @Test
     void WarriorLvl1_EquipAxeReqLvl1_ShouldNotThrow() {
         var hero = new Character("Tester", HeroClass.Warrior);
-        var axe = new Weapon("Basic axe", WeaponType.Axe, 1, 1, 1);
+        var weapon = new Weapon("Basic axe", WeaponType.Axe, 1, 1, 1);
 
-        assertDoesNotThrow(() -> hero.equip(axe));
+        assertDoesNotThrow(() -> hero.equip(weapon));
     }
 
     @Test
     void WarriorLvl1_EquipHammerReqLvl1_ShouldNotThrow() {
         var hero = new Character("Tester", HeroClass.Warrior);
-        var axe = new Weapon("Nail hammer", WeaponType.Hammer, 1, 1, 1);
+        var weapon = new Weapon("Nail hammer", WeaponType.Hammer, 1, 1, 1);
 
-        assertDoesNotThrow(() -> hero.equip(axe));
+        assertDoesNotThrow(() -> hero.equip(weapon));
     }
 
     @Test
     void WarriorLvl1_EquipSwordReqLvl1_ShouldNotThrow() {
         var hero = new Character("Tester", HeroClass.Warrior);
-        var axe = new Weapon("Straight sword", WeaponType.Sword, 1, 1, 1);
+        var weapon = new Weapon("Straight sword", WeaponType.Sword, 1, 1, 1);
 
-        assertDoesNotThrow(() -> hero.equip(axe));
+        assertDoesNotThrow(() -> hero.equip(weapon));
     }
 
     @Test
     void WarriorLvl1_EquipAxeReqLvl2_ShouldThrow() {
         var hero = new Character("Tester", HeroClass.Warrior);
-        var axe = new Weapon("Basic axe", WeaponType.Axe, 2, 1, 1);
+        var weapon = new Weapon("Basic axe", WeaponType.Axe, 2, 1, 1);
 
-        assertThrows(InvalidWeaponException.class, () -> hero.equip(axe));
+        assertThrows(InvalidWeaponException.class, () -> hero.equip(weapon));
     }
 
     @Test
     void WarriorLvl1_EquipHammerReqLvl2_ShouldThrow() {
         var hero = new Character("Tester", HeroClass.Warrior);
-        var axe = new Weapon("Nail hammer", WeaponType.Hammer, 2, 1, 1);
+        var weapon = new Weapon("Nail hammer", WeaponType.Hammer, 2, 1, 1);
 
-        assertThrows(InvalidWeaponException.class, () -> hero.equip(axe));
+        assertThrows(InvalidWeaponException.class, () -> hero.equip(weapon));
     }
 
     @Test
     void WarriorLvl1_EquipSwordReqLvl2_ShouldThrow() {
         var hero = new Character("Tester", HeroClass.Warrior);
-        var axe = new Weapon("Straight sword", WeaponType.Sword, 2, 1, 1);
+        var weapon = new Weapon("Straight sword", WeaponType.Sword, 2, 1, 1);
 
-        assertThrows(InvalidWeaponException.class, () -> hero.equip(axe));
+        assertThrows(InvalidWeaponException.class, () -> hero.equip(weapon));
     }
 
     //endregion
@@ -112,33 +112,33 @@ class WarriorTest {
     @Test
     void Warrior_EquipDagger_ShouldThrow() {
         var hero = new Character("Tester", HeroClass.Warrior);
-        var staff = new Weapon("Small knife", WeaponType.Dagger, 1, 10, 1);
+        var weapon = new Weapon("Small knife", WeaponType.Dagger, 1, 10, 1);
 
-        assertThrows(InvalidWeaponException.class, () -> hero.equip(staff));
+        assertThrows(InvalidWeaponException.class, () -> hero.equip(weapon));
     }
 
     @Test
     void Warrior_EquipStaff_ShouldThrow() {
         var hero = new Character("Tester", HeroClass.Warrior);
-        var staff = new Weapon("Long stick", WeaponType.Staff, 1, 10, 1);
+        var weapon = new Weapon("Long stick", WeaponType.Staff, 1, 10, 1);
 
-        assertThrows(InvalidWeaponException.class, () -> hero.equip(staff));
+        assertThrows(InvalidWeaponException.class, () -> hero.equip(weapon));
     }
 
     @Test
     void Warrior_EquipWand_ShouldThrow() {
         var hero = new Character("Tester", HeroClass.Warrior);
-        var staff = new Weapon("Small magic stick", WeaponType.Wand, 1, 10, 1);
+        var weapon = new Weapon("Small magic stick", WeaponType.Wand, 1, 10, 1);
 
-        assertThrows(InvalidWeaponException.class, () -> hero.equip(staff));
+        assertThrows(InvalidWeaponException.class, () -> hero.equip(weapon));
     }
 
     @Test
     void Warrior_EquipBow_ShouldThrow() {
         var hero = new Character("Tester", HeroClass.Warrior);
-        var staff = new Weapon("Shortbow", WeaponType.Bow, 1, 10, 1);
+        var weapon = new Weapon("Shortbow", WeaponType.Bow, 1, 10, 1);
 
-        assertThrows(InvalidWeaponException.class, () -> hero.equip(staff));
+        assertThrows(InvalidWeaponException.class, () -> hero.equip(weapon));
     }
 
     //endregion
@@ -147,33 +147,33 @@ class WarriorTest {
     @Test
     void WarriorLvl1_EquipMailArmorReqLvl1_ShouldNotThrow() {
         var hero = new Character("Tester", HeroClass.Warrior);
-        var mail = new Armor("Chainmail", EquipmentSlot.Torso, 1, ArmorType.Mail, 0, 0, 0);
+        var armor = new Armor("Chainmail", EquipmentSlot.Torso, 1, ArmorType.Mail, 0, 0, 0);
 
-        assertDoesNotThrow(() -> hero.equip(mail));
+        assertDoesNotThrow(() -> hero.equip(armor));
     }
 
     @Test
     void WarriorLvl1_EquipPlateArmorReqLvl1_ShouldNotThrow() {
         var hero = new Character("Tester", HeroClass.Warrior);
-        var cuirass = new Armor("Steel cuirass", EquipmentSlot.Torso, 1, ArmorType.Plate, 0, 0, 0);
+        var armor = new Armor("Steel cuirass", EquipmentSlot.Torso, 1, ArmorType.Plate, 0, 0, 0);
 
-        assertDoesNotThrow(() -> hero.equip(cuirass));
+        assertDoesNotThrow(() -> hero.equip(armor));
     }
 
     @Test
     void WarriorLvl1_EquipMailArmorReqLvl2_ShouldThrow() {
         var hero = new Character("Tester", HeroClass.Warrior);
-        var mail = new Armor("Chainmail", EquipmentSlot.Torso, 2, ArmorType.Mail, 0, 0, 0);
+        var armor = new Armor("Chainmail", EquipmentSlot.Torso, 2, ArmorType.Mail, 0, 0, 0);
 
-        assertThrows(InvalidArmorException.class, () -> hero.equip(mail));
+        assertThrows(InvalidArmorException.class, () -> hero.equip(armor));
     }
 
     @Test
     void WarriorLvl1_EquipPlateArmorReqLvl2_ShouldThrow() {
         var hero = new Character("Tester", HeroClass.Warrior);
-        var cuirass = new Armor("Steel cuirass", EquipmentSlot.Torso,2, ArmorType.Plate, 0, 0, 0);
+        var armor = new Armor("Steel cuirass", EquipmentSlot.Torso,2, ArmorType.Plate, 0, 0, 0);
 
-        assertThrows(InvalidArmorException.class, () -> hero.equip(cuirass));
+        assertThrows(InvalidArmorException.class, () -> hero.equip(armor));
     }
 
     //endregion
@@ -182,17 +182,17 @@ class WarriorTest {
     @Test
     void Warrior_EquipClothArmor_ShouldThrow() {
         var hero = new Character("Tester", HeroClass.Warrior);
-        var cloth = new Armor("Loin cloth", EquipmentSlot.Legs, 1, ArmorType.Cloth, 0, 0, 0);
+        var armor = new Armor("Loin cloth", EquipmentSlot.Legs, 1, ArmorType.Cloth, 0, 0, 0);
 
-        assertThrows(InvalidArmorException.class, () -> hero.equip(cloth));
+        assertThrows(InvalidArmorException.class, () -> hero.equip(armor));
     }
 
     @Test
     void Warrior_EquipLeatherArmor_ShouldThrow() {
         var hero = new Character("Tester", HeroClass.Warrior);
-        var leatherArmor = new Armor("Head band", EquipmentSlot.Head, 1, ArmorType.Leather, 0, 0, 0);
+        var armor = new Armor("Head band", EquipmentSlot.Head, 1, ArmorType.Leather, 0, 0, 0);
 
-        assertThrows(InvalidArmorException.class, () -> hero.equip(leatherArmor));
+        assertThrows(InvalidArmorException.class, () -> hero.equip(armor));
     }
 
     //endregion
@@ -328,7 +328,6 @@ class WarriorTest {
         };
 
         var weapon = new Weapon("Iron stick", WeaponType.Hammer, 1, 10, 1.2f);
-
 
         for (var armor: armors) {
             hero.equip(armor);
