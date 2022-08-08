@@ -24,4 +24,13 @@ public class Attributes {
                 intelligence + _other.intelligence
         );
     }
+
+    @Override
+    public String toString() {
+        return String.format("""
+                Strength: %s
+                Dexterity: %s
+                Intelligence: %s""",
+                strength, dexterity, intelligence);
+    }
 }

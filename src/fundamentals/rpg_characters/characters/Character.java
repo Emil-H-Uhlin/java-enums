@@ -102,31 +102,77 @@ public class Character {
         else throw new InvalidWeaponException("Item equipped in 'Weapon' slot is not a weapon!");
     }
 
+    public String display() {
+        var builder = new StringBuilder();
+
+        builder.append(String.format("""
+                        
+                        Character class: %s
+                        Name: %s
+                        Level: %s
+                        
+                        Base attributs: 
+                        %s
+                        
+                        Total attributes: 
+                        %s
+                        
+                        """,
+                _class.name(),
+                name,
+                level,
+                getBaseAttributes(),
+                getTotalAttributes()));
+
+        if (equipment.values().size() < 1)
+            return builder.toString();
+
+        for (var slot: equipment.keySet()) {
+            var item = equipment.get(slot);
+
+            if (item instanceof Weapon weapon) {
+                builder.append(String.format("""
+                    Weapon: {
+                    Item name: %s
+                    Item slot: Weapon
+                    
+                    Weapon damage: %s
+                    Weapon attack speed: %s
+                    Weapon DPS: %s
+                    }
+                    
+                    """,
+                        weapon.getItemName(),
+                        weapon.getDamage(),
+                        weapon.getAttacksPerSecond(),
+                        weapon.getDPS()));
+            }
+            else if (item instanceof Armor armor) {
+                builder.append(String.format("""
+                    Armor: {
+                    Item name: %s
+                    Item slot: %s
+                    
+                    Bonus attributes: 
+                    %s
+                    }
+                    
+                    """,
+                        armor.getItemName(),
+                        armor.getItemSlot(),
+                        armor.getBonusAttributes()));
+            }
+        }
+
+        return builder.toString();
+    }
+
     @Override
     public String toString() {
-        var total = getTotalAttributes();
-
-        return String.format("""
-                Character name: %s
-                Level: %s
-                DPS: %s
-                
-                Base Attributes:
-                    - Strength: %s
-                    - Dexterity: %s
-                    - Intelligence: %s
-                
-                Total Attributes:
-                    - Strength: %s
-                    - Dexterity: %s
-                    - Intelligence: %s
-                """, name, level,
-                getDPS(),
-                attributes.getStrength(),
-                attributes.getDexterity(),
-                attributes.getIntelligence(),
-                total.getStrength(),
-                total.getDexterity(),
-                total.getIntelligence());
+        return "Character{" +
+                "name='" + name + '\'' +
+                ", _class=" + _class.name() +
+                ", level=" + level +
+                '}';
     }
 }
