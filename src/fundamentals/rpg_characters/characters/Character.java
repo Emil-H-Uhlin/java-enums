@@ -111,8 +111,7 @@ public class Character {
                         Name: %s
                         Level: %s
                         
-                        Base attributs: 
-                        %s
+                        DPS: %s
                         
                         Total attributes: 
                         %s
@@ -121,7 +120,7 @@ public class Character {
                 _class.name(),
                 name,
                 level,
-                getBaseAttributes(),
+                getDPS(),
                 getTotalAttributes()));
 
         if (equipment.values().size() < 1)
