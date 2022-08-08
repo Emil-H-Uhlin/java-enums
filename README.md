@@ -7,18 +7,18 @@ This project is written in pure Java and is the basis for a small RPG
 game. _Create, level up and equip your character with cool but text
 represented weapons!_
 
-The project includes some key classes for creating a character, weapons and armor. 
-Weapons have DPS calculated based on weapon damage and attack speed. Armor
+The project includes some key functionality for creating a character, weapons and 
+armor. Weapons have DPS calculated based on weapon damage and attack speed. Armor
 provide the character with bonus attributes which assists in scaling the character
 DPS.
 
 ### Character classes
-I first implemented character classes as their own classes inheriting
-from an abstract super-class `Hero.java`. I realised that creating new characters 
-would be an annoyance since you'd have to create a new class that inherits from 
-`Hero` every time you'd want to add a new character class to the project. 
-You'd also have to override some methods, and flood the file hierarchy if your 
-game has a lot of classes.
+I first implemented character classes as their own classes inheriting from an 
+abstract super-class `Hero.java`. I realised that creating new characters would 
+be an annoyance since you'd have to create a new class that inherits from `Hero` 
+every time you'd want to add a new character class to the project. You'd also have 
+to override some methods, and flood the file hierarchy if your game has a lot 
+of classes.
 
 Instead, I figured I'd make use of _Java enums_ which I had previously learned can do
 much more than something like C# enums. And so I created _HeroClass_, an enum that 
@@ -56,7 +56,12 @@ var hero = new Character("Emil", HeroClass.Druid);
 ### Install and run
 The project is built in IntelliJ using <b>JDK 17</b> and <b>JUnit 5</b>.
 - Install JDK 17
-- Import _src/_ to project root, should apply to either <b>IntelliJ</b> or <b>Eclipse</b>.
-- If you'd like to include testing JUnit5 tests also import _test/_.
+- Create a new project using either **_IntelliJ_** or **_Eclipse_**
+- Import _src/_ to project root
+- There is no _run_ per se, but if you'd like to play around - add a file
+containing `public static void main(String[] args)` and create your very 
+first character.
 
-### Testing
+#### Testing
+If you'd like to check out or do some additional testing also import the _test/_-
+folder to your project root.
