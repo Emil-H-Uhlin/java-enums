@@ -13,6 +13,15 @@ public class Weapon implements IEquipable {
     private final int damage;
     private final float attacksPerSecond;
 
+    /**
+     * Constructs a new weapon
+     * @param _name Name of weapon
+     * @param _weaponType Type of weapon
+     * @param _requiredLevel Level requirement of weapon
+     * @param _damage Damage dealt
+     * @param _attacksPerSecond Attack speed (attacks per second)
+     * @throws InvalidWeaponException Weapons may not have damage or attack speed less than 0
+     */
     public Weapon(String _name, WeaponType _weaponType, int _requiredLevel, int _damage, float _attacksPerSecond) throws InvalidWeaponException {
         name = _name;
         requiredLevel = _requiredLevel;

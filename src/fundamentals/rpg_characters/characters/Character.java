@@ -9,11 +9,11 @@ import java.util.HashMap;
 
 public class Character {
     public final String name;
-    public final HeroClass _class;
+    public final HeroClass heroClass;   // base model of character
 
-    private int level = 1;
+    private int level = 1;              // character starts at level 1
 
-    private Attributes attributes;
+    private Attributes attributes;      // base attributes of character
 
     public int getLevel() { return level; }
 
@@ -21,6 +21,9 @@ public class Character {
         return attributes;
     }
 
+    /**
+     * @return The total attributes of the character (base + equipment bonuses)
+     */
     public Attributes getTotalAttributes() {
         Attributes baseAttributes = attributes;
 
@@ -37,32 +40,43 @@ public class Character {
 
     public Character(String _name, HeroClass _heroClass) {
         name = _name;
-        _class = _heroClass;
+        heroClass = _heroClass;
 
-        attributes = _class.level1Attributes;
+        attributes = heroClass.level1Attributes;
     }
 
+    /**
+     * Increment level and add attributes based on character class
+     */
     public void levelUp() {
         level++;
 
-        attributes = attributes.add(_class.gainedAttributesPerLevel);
+        attributes = attributes.add(heroClass.gainedAttributesPerLevel);
     }
 
+    /**
+     * Equip an item or throw if invalid or not allowed
+     * @param _item The item to equip
+     */
     public void equip(IEquipable _item) {
         if (_item instanceof Weapon weapon) {
+            /* Does character meet level requirements? */
             if (weapon.getRequiredLevel() > level) {
                 throw new InvalidWeaponException(String.format("Character '%s' does not meet the level requirements of weapon!", name));
             }
 
-            if (!Arrays.asList(_class.allowedWeapons).contains(weapon.weaponType)) {
-                throw new InvalidWeaponException(String.format("The class '%s' is not allowed to use '%ss'!", _class.name(), weapon.weaponType.name()));
+            /* Is weapon allowed? */
+            if (!Arrays.asList(heroClass.allowedWeapons).contains(weapon.weaponType)) {
+                throw new InvalidWeaponException(String.format("The class '%s' is not allowed to use '%ss'!", heroClass.name(), weapon.weaponType.name()));
             }
         } else if (_item instanceof Armor armor) {
+            /* Does character meet level requirements? */
             if (armor.getRequiredLevel() > level) {
                 throw new InvalidArmorException(String.format("Character '%s' does not meet the level requirements of armor!", name));
             }
 
-            if (!Arrays.asList(_class.allowedArmor).contains(armor.armorType)) {
+            /* Is weapon allowed? */
+            if (!Arrays.asList(heroClass.allowedArmor).contains(armor.armorType)) {
                 throw new InvalidArmorException(String.format("Character '%s' is not allowed to use armor of type '%s'", name, armor.armorType.name()));
             }
         }
@@ -70,10 +84,13 @@ public class Character {
         equipment.put(_item.getItemSlot(), _item);
     }
 
+    /**
+     * @return The total of the characters 'primary' attribute
+     */
     private int getTotalPrimaryAttribute() {
         var total = getTotalAttributes();
 
-        switch (_class.primaryAttribute) {
+        switch (heroClass.primaryAttribute) {
             case Strength -> {
                 return total.getStrength();
             }
@@ -87,21 +104,33 @@ public class Character {
         }
     }
 
+    /**
+     * Calculates the characters damage per second (DPS) based
+     * on total attributes and equipped weapon.
+     *
+     * @return The character DPS
+     */
     public float getDPS() {
         var item = equipment.get(EquipmentSlot.Weapon);
 
         var primaryAttribute = getTotalPrimaryAttribute();
 
+        /* No weapon equipped */
         if (item == null) {
             return 1f + (primaryAttribute / 100f);
         }
 
+        /* Check calculate dps based on equipped weapon (or throw exception if equipped 'weapon' is not a weapon) */
         if (item instanceof Weapon weapon) {
             return weapon.getDPS() * (1 + (primaryAttribute / 100f));
         }
         else throw new InvalidWeaponException("Item equipped in 'Weapon' slot is not a weapon!");
     }
 
+    /**
+     * @return A text representation of the character including
+     * class, name, level, dps, attributes and equipment
+     */
     public String display() {
         var builder = new StringBuilder();
 
@@ -117,12 +146,13 @@ public class Character {
                         %s
                         
                         """,
-                _class.name(),
+                heroClass.name(),
                 name,
                 level,
                 getDPS(),
                 getTotalAttributes()));
 
+        /* Return as is if there is no equipment present */
         if (equipment.values().size() < 1)
             return builder.toString();
 
@@ -169,7 +199,7 @@ public class Character {
     public String toString() {
         return "Character{" +
                 "name='" + name + '\'' +
-                ", _class=" + _class.name() +
+                ", _class=" + heroClass.name() +
                 ", level=" + level +
                 '}';
     }
