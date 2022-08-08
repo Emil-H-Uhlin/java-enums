@@ -132,32 +132,31 @@ public class Character {
 
             if (item instanceof Weapon weapon) {
                 builder.append(String.format("""
-                    Weapon: {
-                    Item name: %s
-                    Item slot: Weapon
-                    
-                    Weapon damage: %s
-                    Weapon attack speed: %s
-                    Weapon DPS: %s
-                    }
-                    
-                    """,
+                                Weapon: {
+                                Item name: %s
+                                Item slot: Weapon
+                                                    
+                                Weapon damage: %s
+                                Weapon attack speed: %s
+                                Weapon DPS: %s
+                                }
+                                                    
+                                """,
                         weapon.getItemName(),
                         weapon.getDamage(),
                         weapon.getAttacksPerSecond(),
                         weapon.getDPS()));
-            }
-            else if (item instanceof Armor armor) {
+            } else if (item instanceof Armor armor) {
                 builder.append(String.format("""
-                    Armor: {
-                    Item name: %s
-                    Item slot: %s
-                    
-                    Bonus attributes: 
-                    %s
-                    }
-                    
-                    """,
+                                Armor: {
+                                Item name: %s
+                                Item slot: %s
+                                                    
+                                Bonus attributes: 
+                                %s
+                                }
+                                                    
+                                """,
                         armor.getItemName(),
                         armor.getItemSlot(),
                         armor.getBonusAttributes()));
