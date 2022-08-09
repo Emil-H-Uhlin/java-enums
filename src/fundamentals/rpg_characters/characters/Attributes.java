@@ -17,6 +17,9 @@ public class Attributes {
         intelligence = _int;
     }
 
+    /**
+     * Adds two attribute-objects together
+     */
     public Attributes add(Attributes _other) {
         return new Attributes(
                 strength + _other.strength,
