@@ -56,13 +56,31 @@ var hero = new Character("Emil", HeroClass.Druid);
 ### Install and run
 The project is built in IntelliJ using <b>JDK 17</b> and <b>JUnit 5</b>.
 - Install JDK 17
-- Create a new project using either **_IntelliJ_** or **_Eclipse_**
-- Import _src/_ to project root
+- With IntelliJ 
+  - Either create a new project using the _Project from Version Control_ option 
+  to clone project. 
+  - Or create a new empty project and import _src/_ to root folder.
 - There is no _run_ per se, but if you'd like to mess around you can add some 
 logic to `public static void main(String[] args)` in `Main.java` and run 
-the file.
+the file/project.
 
 #### Testing
-If you'd like to check out or do some additional testing also import the _test/_-
-folder to your project root, after making sure to add JUnit 5 to project 
+If you'd like to check out or do some additional testing also import the 
+_test/_-folder to your project root, after making sure __JUnit5__ is in the project 
 dependencies.
+
+To add a new test, add a new `static void`-method and mark it with
+the `@Test`-annotation. In order to test a feature the method needs some sort 
+of assertion-call. If multiple calls are required (as when testing attributes), use
+`assertAll()` as such: 
+
+```` java
+var expected = hero.getBaseAttributes().add(new Attributes(6, 12, 5));
+var actual = hero.getTotalAttributes();
+
+assertAll(() -> {
+        assertEquals(expected.getStrength(), actual.getStrength());
+        assertEquals(expected.getDexterity(), actual.getDexterity());
+        assertEquals(expected.getIntelligence(), actual.getIntelligence());
+});
+````
