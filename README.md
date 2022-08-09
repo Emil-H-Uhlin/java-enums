@@ -58,10 +58,11 @@ The project is built in IntelliJ using <b>JDK 17</b> and <b>JUnit 5</b>.
 - Install JDK 17
 - Create a new project using either **_IntelliJ_** or **_Eclipse_**
 - Import _src/_ to project root
-- There is no _run_ per se, but if you'd like to play around - add a file
-containing `public static void main(String[] args)` and create your very 
-first character.
+- There is no _run_ per se, but if you'd like to mess around you can add some 
+logic to `public static void main(String[] args)` in `Main.java` and run 
+the file.
 
 #### Testing
 If you'd like to check out or do some additional testing also import the _test/_-
-folder to your project root.
+folder to your project root, after making sure to add JUnit 5 to project 
+dependencies.
