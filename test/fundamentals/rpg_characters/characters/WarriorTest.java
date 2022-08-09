@@ -26,9 +26,11 @@ class WarriorTest {
         Attributes expected = HeroClass.Warrior.level1Attributes;
         Attributes actual = hero.getBaseAttributes();
 
-        assertEquals(expected.getStrength(), actual.getStrength());
-        assertEquals(expected.getDexterity(), actual.getDexterity());
-        assertEquals(expected.getIntelligence(), actual.getIntelligence());
+        assertAll(() -> {
+            assertEquals(expected.getStrength(), actual.getStrength());
+            assertEquals(expected.getDexterity(), actual.getDexterity());
+            assertEquals(expected.getIntelligence(), actual.getIntelligence());
+        });
     }
 
     @Test
@@ -50,9 +52,11 @@ class WarriorTest {
 
         Attributes actual = hero.getBaseAttributes();
 
-        assertEquals(expected.getStrength(), actual.getStrength());
-        assertEquals(expected.getDexterity(), actual.getDexterity());
-        assertEquals(expected.getIntelligence(), actual.getIntelligence());
+        assertAll(() -> {
+            assertEquals(expected.getStrength(), actual.getStrength());
+            assertEquals(expected.getDexterity(), actual.getDexterity());
+            assertEquals(expected.getIntelligence(), actual.getIntelligence());
+        });
     }
 
     //endregion
@@ -104,6 +108,16 @@ class WarriorTest {
         var weapon = new Weapon("Straight sword", WeaponType.Sword, 2, 1, 1);
 
         assertThrows(InvalidWeaponException.class, () -> hero.equip(weapon));
+    }
+
+    @Test
+    void WarriorLvl1_EquipAxeReqLvl1_TestEquipped() {
+        var hero = new Character("Tester", HeroClass.Warrior);
+        var weapon = new Weapon("Basic axe", WeaponType.Axe, 1, 1, 1);
+
+        hero.equip(weapon);
+
+        assertEquals(hero.getEquipment().get(EquipmentSlot.Weapon), weapon);
     }
 
     //endregion
@@ -239,14 +253,16 @@ class WarriorTest {
         var hero = new Character("Tester", HeroClass.Warrior);
         var armor = new Armor("Chainmail", EquipmentSlot.Torso, 1, ArmorType.Mail, 4, 2, 2);
 
-        var expectedTotal = hero.getBaseAttributes().add(armor.getBonusAttributes());
+        var expected = hero.getBaseAttributes().add(armor.getBonusAttributes());
         hero.equip(armor);
 
-        var total = hero.getTotalAttributes();
+        var actual = hero.getTotalAttributes();
 
-        assertEquals(expectedTotal.getStrength(), total.getStrength());
-        assertEquals(expectedTotal.getDexterity(), total.getDexterity());
-        assertEquals(expectedTotal.getIntelligence(), total.getIntelligence());
+        assertAll(() -> {
+            assertEquals(expected.getStrength(), actual.getStrength());
+            assertEquals(expected.getDexterity(), actual.getDexterity());
+            assertEquals(expected.getIntelligence(), actual.getIntelligence());
+        });
     }
 
     @Test
@@ -254,15 +270,17 @@ class WarriorTest {
         var hero = new Character("Tester", HeroClass.Warrior);
         var armor = new Armor("Iron cuirass", EquipmentSlot.Torso, 1, ArmorType.Plate, 8, 1, 0);
 
-        var expectedTotal = hero.getBaseAttributes().add(armor.getBonusAttributes());
+        var expected = hero.getBaseAttributes().add(armor.getBonusAttributes());
 
         hero.equip(armor);
 
-        var total = hero.getTotalAttributes();
+        var actual = hero.getTotalAttributes();
 
-        assertEquals(expectedTotal.getStrength(), total.getStrength());
-        assertEquals(expectedTotal.getDexterity(), total.getDexterity());
-        assertEquals(expectedTotal.getIntelligence(), total.getIntelligence());
+        assertAll(() -> {
+            assertEquals(expected.getStrength(), actual.getStrength());
+            assertEquals(expected.getDexterity(), actual.getDexterity());
+            assertEquals(expected.getIntelligence(), actual.getIntelligence());
+        });
     }
 
     @Test
@@ -275,17 +293,19 @@ class WarriorTest {
                 new Armor("Iron bucket", EquipmentSlot.Head, 1, ArmorType.Plate, 1, 1, 0),
         };
 
-        var expectedTotal = hero.getBaseAttributes().add(new Attributes(5+2+1, 2+1+1, 2+0+0));
+        var expected = hero.getBaseAttributes().add(new Attributes(5+2+1, 2+1+1, 2+0+0));
 
         for (var armor: armors) {
             hero.equip(armor);
         }
 
-        var total = hero.getTotalAttributes();
+        var actual = hero.getTotalAttributes();
 
-        assertEquals(expectedTotal.getStrength(), total.getStrength());
-        assertEquals(expectedTotal.getDexterity(), total.getDexterity());
-        assertEquals(expectedTotal.getIntelligence(), total.getIntelligence());
+        assertAll(() -> {
+            assertEquals(expected.getStrength(), actual.getStrength());
+            assertEquals(expected.getDexterity(), actual.getDexterity());
+            assertEquals(expected.getIntelligence(), actual.getIntelligence());
+        });
     }
 
     @Test

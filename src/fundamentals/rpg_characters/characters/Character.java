@@ -15,6 +15,8 @@ public class Character {
 
     private Attributes attributes;      // base attributes of character
 
+    private final HashMap<EquipmentSlot, IEquipable> equipment = new HashMap<>();
+
     public int getLevel() { return level; }
 
     public Attributes getBaseAttributes() {
@@ -36,7 +38,9 @@ public class Character {
         return baseAttributes;
     }
 
-    private final HashMap<EquipmentSlot, IEquipable> equipment = new HashMap<>();
+    public HashMap<EquipmentSlot, IEquipable> getEquipment() {
+        return equipment;
+    }
 
     public Character(String _name, HeroClass _heroClass) {
         name = _name;
