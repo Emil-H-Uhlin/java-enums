@@ -12,6 +12,12 @@ armor. Weapons have DPS calculated based on weapon damage and attack speed. Armo
 provide the character with bonus attributes which assists in scaling the character
 DPS.
 
+##### Requirements
+- Various _character classes_ having attributes which increase at different rates as the character gains levels.
+- _Equipment_, such as armor and weapons, that characters can equip. The equipped items will alter the power of the character, causing it to deal more damage and be able to survive longer. Certain characters can equip certain item types.
+- _Custom exceptions._ There are two custom exceptions you are required to write.
+- _Full test coverage of the functionality._ Some testing data is provided, it can be used to complete the assignment in a test-driven development manner.
+
 ### Character classes
 I first implemented character classes as their own classes inheriting from an 
 abstract super-class `Hero.java`. I realised that creating new characters would 
