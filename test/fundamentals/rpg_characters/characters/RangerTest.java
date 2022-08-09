@@ -77,6 +77,16 @@ class RangerTest {
         assertThrows(InvalidWeaponException.class, () -> hero.equip(weapon));
     }
 
+    @Test
+    void RangerLvl1_EquipBowReqLvl1_TestEquipped() {
+        var hero = new Character("Tester", HeroClass.Ranger);
+        var weapon = new Weapon("Long bow", WeaponType.Bow, 1, 1, 1);
+
+        hero.equip(weapon);
+
+        assertEquals(hero.getEquipment().get(EquipmentSlot.Weapon), weapon);
+    }
+
     //endregion
     //region Disallowed weapons
 

@@ -93,6 +93,16 @@ class RogueTest {
         assertThrows(InvalidWeaponException.class, () -> hero.equip(weapon));
     }
 
+    @Test
+    void RogueLvl1_EquipDaggerReqLvl1_TestEquipped() {
+        var hero = new Character("Tester", HeroClass.Rogue);
+        var weapon = new Weapon("Small knife", WeaponType.Dagger, 1, 1, 1);
+
+        hero.equip(weapon);
+
+        assertEquals(hero.getEquipment().get(EquipmentSlot.Weapon), weapon);
+    }
+
     //endregion
     //region Disallowed weapons
 

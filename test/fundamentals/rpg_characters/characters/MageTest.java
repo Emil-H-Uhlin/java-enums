@@ -93,6 +93,16 @@ class MageTest {
         assertThrows(InvalidWeaponException.class, () -> hero.equip(weapon));
     }
 
+    @Test
+    void MageLvl1_EquipStaffReqLvl1_TestEquipped() {
+        var hero = new Character("Tester", HeroClass.Mage);
+        var weapon = new Weapon("Staff of Death", WeaponType.Staff, 1, 1, 1);
+
+        hero.equip(weapon);
+
+        assertEquals(hero.getEquipment().get(EquipmentSlot.Weapon), weapon);
+    }
+
     //endregion
     //region Disallowed weapons
 

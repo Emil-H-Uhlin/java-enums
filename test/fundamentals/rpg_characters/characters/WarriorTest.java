@@ -110,6 +110,16 @@ class WarriorTest {
         assertThrows(InvalidWeaponException.class, () -> hero.equip(weapon));
     }
 
+    @Test
+    void WarriorLvl1_EquipAxeReqLvl1_TestEquipped() {
+        var hero = new Character("Tester", HeroClass.Warrior);
+        var weapon = new Weapon("Basic axe", WeaponType.Axe, 1, 1, 1);
+
+        hero.equip(weapon);
+
+        assertEquals(hero.getEquipment().get(EquipmentSlot.Weapon), weapon);
+    }
+
     //endregion
     //region Disallowed weapons
 
