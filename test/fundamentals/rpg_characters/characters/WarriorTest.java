@@ -26,9 +26,11 @@ class WarriorTest {
         Attributes expected = HeroClass.Warrior.level1Attributes;
         Attributes actual = hero.getBaseAttributes();
 
-        assertEquals(expected.getStrength(), actual.getStrength());
-        assertEquals(expected.getDexterity(), actual.getDexterity());
-        assertEquals(expected.getIntelligence(), actual.getIntelligence());
+        assertAll(() -> {
+            assertEquals(expected.getStrength(), actual.getStrength());
+            assertEquals(expected.getDexterity(), actual.getDexterity());
+            assertEquals(expected.getIntelligence(), actual.getIntelligence());
+        });
     }
 
     @Test
@@ -50,9 +52,11 @@ class WarriorTest {
 
         Attributes actual = hero.getBaseAttributes();
 
-        assertEquals(expected.getStrength(), actual.getStrength());
-        assertEquals(expected.getDexterity(), actual.getDexterity());
-        assertEquals(expected.getIntelligence(), actual.getIntelligence());
+        assertAll(() -> {
+            assertEquals(expected.getStrength(), actual.getStrength());
+            assertEquals(expected.getDexterity(), actual.getDexterity());
+            assertEquals(expected.getIntelligence(), actual.getIntelligence());
+        });
     }
 
     //endregion

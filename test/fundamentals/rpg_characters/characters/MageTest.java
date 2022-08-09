@@ -25,9 +25,11 @@ class MageTest {
         Attributes expected = HeroClass.Mage.level1Attributes;
         Attributes actual = hero.getBaseAttributes();
 
-        assertEquals(expected.getStrength(), actual.getStrength());
-        assertEquals(expected.getDexterity(), actual.getDexterity());
-        assertEquals(expected.getIntelligence(), actual.getIntelligence());
+        assertAll(() -> {
+            assertEquals(expected.getStrength(), actual.getStrength());
+            assertEquals(expected.getDexterity(), actual.getDexterity());
+            assertEquals(expected.getIntelligence(), actual.getIntelligence());
+        });
     }
 
     @Test
@@ -49,9 +51,11 @@ class MageTest {
 
         Attributes actual = hero.getBaseAttributes();
 
-        assertEquals(expected.getStrength(), actual.getStrength());
-        assertEquals(expected.getDexterity(), actual.getDexterity());
-        assertEquals(expected.getIntelligence(), actual.getIntelligence());
+        assertAll(() -> {
+            assertEquals(expected.getStrength(), actual.getStrength());
+            assertEquals(expected.getDexterity(), actual.getDexterity());
+            assertEquals(expected.getIntelligence(), actual.getIntelligence());
+        });
     }
 
     //endregion
