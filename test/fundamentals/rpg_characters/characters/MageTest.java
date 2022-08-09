@@ -225,14 +225,16 @@ class MageTest {
         var hero = new Character("Tester", HeroClass.Mage);
         var armor = new Armor("Chainmail", EquipmentSlot.Torso, 1, ArmorType.Cloth, 4, 2, 2);
 
-        var expectedTotal = hero.getBaseAttributes().add(armor.getBonusAttributes());
+        var expected = hero.getBaseAttributes().add(armor.getBonusAttributes());
         hero.equip(armor);
 
-        var total = hero.getTotalAttributes();
+        var actual = hero.getTotalAttributes();
 
-        assertEquals(expectedTotal.getStrength(), total.getStrength());
-        assertEquals(expectedTotal.getDexterity(), total.getDexterity());
-        assertEquals(expectedTotal.getIntelligence(), total.getIntelligence());
+        assertAll(() -> {
+            assertEquals(expected.getStrength(), actual.getStrength());
+            assertEquals(expected.getDexterity(), actual.getDexterity());
+            assertEquals(expected.getIntelligence(), actual.getIntelligence());
+        });
     }
 
     @Test
@@ -244,17 +246,19 @@ class MageTest {
                 new Armor("Hood", EquipmentSlot.Head, 1, ArmorType.Cloth, 1, 1, 4),
         };
 
-        var expectedTotal = hero.getBaseAttributes().add(new Attributes(1, 2+1, 10+4));
+        var expected = hero.getBaseAttributes().add(new Attributes(1, 2+1, 10+4));
 
         for (var armor: armors) {
             hero.equip(armor);
         }
 
-        var total = hero.getTotalAttributes();
+        var actual = hero.getTotalAttributes();
 
-        assertEquals(expectedTotal.getStrength(), total.getStrength());
-        assertEquals(expectedTotal.getDexterity(), total.getDexterity());
-        assertEquals(expectedTotal.getIntelligence(), total.getIntelligence());
+        assertAll(() -> {
+            assertEquals(expected.getStrength(), actual.getStrength());
+            assertEquals(expected.getDexterity(), actual.getDexterity());
+            assertEquals(expected.getIntelligence(), actual.getIntelligence());
+        });
     }
 
     @Test
