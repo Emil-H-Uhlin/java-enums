@@ -59,33 +59,39 @@ public class Character {
     }
 
     /**
-     * Equip an item or throw if invalid or not allowed
-     * @param _item The item to equip
+     * Equip a weapon or throw if invalid or not allowed
+     * @param weapon The weapon to equip
      */
-    public void equip(IEquipable _item) {
-        if (_item instanceof Weapon weapon) {
-            /* Does character meet level requirements? */
-            if (weapon.getRequiredLevel() > level) {
-                throw new InvalidWeaponException(String.format("Character '%s' does not meet the level requirements of weapon!", name));
-            }
-
-            /* Is weapon allowed? */
-            if (!Arrays.asList(heroClass.allowedWeapons).contains(weapon.weaponType)) {
-                throw new InvalidWeaponException(String.format("The class '%s' is not allowed to use '%ss'!", heroClass.name(), weapon.weaponType.name()));
-            }
-        } else if (_item instanceof Armor armor) {
-            /* Does character meet level requirements? */
-            if (armor.getRequiredLevel() > level) {
-                throw new InvalidArmorException(String.format("Character '%s' does not meet the level requirements of armor!", name));
-            }
-
-            /* Is weapon allowed? */
-            if (!Arrays.asList(heroClass.allowedArmor).contains(armor.armorType)) {
-                throw new InvalidArmorException(String.format("Character '%s' is not allowed to use armor of type '%s'", name, armor.armorType.name()));
-            }
+    public void equip(Weapon weapon) {
+        /* Does character meet level requirements? */
+        if (weapon.getRequiredLevel() > level) {
+            throw new InvalidWeaponException(String.format("Character '%s' does not meet the level requirements of weapon!", name));
         }
-
-        equipment.put(_item.getItemSlot(), _item);
+    
+        /* Is weapon allowed? */
+        if (!Arrays.asList(heroClass.allowedWeapons).contains(weapon.weaponType)) {
+            throw new InvalidWeaponException(String.format("The class '%s' is not allowed to use '%ss'!", heroClass.name(), weapon.weaponType.name()));
+        }
+        
+        equipment.put(weapon.getItemSlot(), weapon);
+    }
+    
+    /**
+     * Equip a piece of armor or throw if invalid or not allowed
+     * @param armor The armor to equip
+     */
+    public void equip(Armor armor) {
+        /* Does character meet level requirements? */
+        if (armor.getRequiredLevel() > level) {
+            throw new InvalidArmorException(String.format("Character '%s' does not meet the level requirements of armor!", name));
+        }
+    
+        /* Is weapon allowed? */
+        if (!Arrays.asList(heroClass.allowedArmor).contains(armor.armorType)) {
+            throw new InvalidArmorException(String.format("Character '%s' is not allowed to use armor of type '%s'", name, armor.armorType.name()));
+        }
+        
+        equipment.put(armor.getItemSlot(), armor);
     }
 
     /**
