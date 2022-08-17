@@ -19,6 +19,7 @@ DPS.
 - _Full test coverage of the functionality._ Some testing data is provided, it can be used to complete the assignment in a test-driven development manner.
 
 ### Character classes
+##### With inheritance
 I first implemented character classes as their own classes inheriting from an 
 abstract super-class `Hero.java`. I realised that creating new characters would 
 be an annoyance since you'd have to create a new class that inherits from `Hero` 
@@ -27,7 +28,10 @@ to override some methods, and flood the file hierarchy if your game has a lot
 of classes.
 
 Instead, I figured I'd make use of _Java enums_ which I had previously learned can do
-much more than something like C# enums. And so I created _HeroClass_, an enum that 
+much more than something like C# enums. 
+
+##### Enums 
+And so I created _HeroClass_, an enum that 
 contains info relevant for any character class.  
 This compacts the program and makes it easier to add new character classes. If you'd
 want to add a new class, simply add another entry to the Enum as such: 
@@ -39,8 +43,8 @@ public enum HeroClass {
     Ranger(...), 
     Mage(...), 
     
-    Druid(3, 1, 3,                              // level 1 stats
-        2, 2, 2,                                // stats gained per level
+    Druid(3, 1, 3,                              // level 1 stats (str, dex, int)
+        2, 2, 2,                                // stats gained per level (str, dex, int)
         PrimaryAttribute.Intelligence,          // class primary attribute
         new WeaponType[] {
             WeaponType.Staff, WeaponType.Hammer // allowed weapon types
